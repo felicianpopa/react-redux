@@ -12,7 +12,7 @@ const ShoppingList = () => {
   }, []);
   return (
     <div>
-      <h1>Shopping list</h1>
+      <h2>Shopping list items:</h2>
       <ul>
         {shoppingList.map((listItem) => {
           const { id, itemName } = listItem;

@@ -4,10 +4,10 @@ const ShoppingList = lazy(() => import("./features/shoppingList/ShoppingList"));
 function App() {
   return (
     <>
-      <Suspense fallback={<h4>Loading...</h4>}>
+      <h1>Shopping list component</h1>
+      <Suspense fallback={<h2>Loading...</h2>}>
         <ShoppingList />
       </Suspense>
-      <h2>Shopping list footer</h2>
     </>
   );
 }

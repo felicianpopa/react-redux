@@ -1,16 +1,19 @@
 {
   "shoppingList": [
     {
+      "id": 1,
       "itemName": "Milk",
       "qty": 1,
       "checked": false
     },
     {
+      "id": 2,
       "itemName": "Eggs",
       "qty": 10,
       "checked": false
     },
     {
+      "id": 3,
       "itemName": "Bread",
       "qty": 2,
       "checked": true

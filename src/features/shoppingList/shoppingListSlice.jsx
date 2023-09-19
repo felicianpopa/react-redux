@@ -5,11 +5,11 @@ const url = "http://localhost:5000/shoppingList";
 export const getShoppingList = createAsyncThunk("getShoppinglist", async () => {
   const response = await fetch(url);
   const data = await response.json();
-  console.warn("data ", data);
+  return data;
 });
 const shoppingListSlice = createSlice({
   name: "shoppingList",
-  initialState: { shoppinglist: [], isLoading: true },
+  initialState: { shoppingList: [], isLoading: true },
   extraReducers: (builder) => {
     builder
       .addCase(getShoppingList.pending, (state) => {
@@ -17,7 +17,8 @@ const shoppingListSlice = createSlice({
       })
       .addCase(getShoppingList.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.cartItems = action.payload;
+        console.warn("state ", state);
+        state.shoppingList = action.payload;
       })
       .addCase(getShoppingList.rejected, (state, action) => {
         state.isLoading = false;

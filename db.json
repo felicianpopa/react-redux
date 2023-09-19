@@ -1,19 +1,19 @@
 {
-  "posts": [
+  "shoppingList": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "itemName": "Milk",
+      "qty": 1,
+      "checked": false
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "itemName": "Eggs",
+      "qty": 10,
+      "checked": false
+    },
+    {
+      "itemName": "Bread",
+      "qty": 2,
+      "checked": true
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

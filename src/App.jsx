@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { Suspense, lazy } from "react";
 import "./App.css";
-import ShoppingList from "./features/shoppingList/ShoppingList";
-
+const ShoppingList = lazy(() => import("./features/shoppingList/ShoppingList"));
 function App() {
   return (
     <>
-      <ShoppingList />
+      <Suspense fallback={<h4>Loading...</h4>}>
+        <ShoppingList />
+      </Suspense>
+      <h2>Shopping list footer</h2>
     </>
   );
 }

@@ -7,6 +7,25 @@ export const getShoppingList = createAsyncThunk("getShoppinglist", async () => {
   const data = await response.json();
   return data;
 });
+
+const updateItem = async (id, updatedData) => {
+  try {
+    const response = await fetch(`${url}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (!response.ok) {
+      throw new Error("PUT request failed");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const shoppingListSlice = createSlice({
   name: "shoppingList",
   initialState: { shoppingList: [], isLoading: true },
@@ -16,6 +35,7 @@ const shoppingListSlice = createSlice({
         (item) => item.id === payload.id
       );
       listItem.checked = listItem.checked ? false : true;
+      updateItem(payload.id, listItem);
     },
   },
   extraReducers: (builder) => {

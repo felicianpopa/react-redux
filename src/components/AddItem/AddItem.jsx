@@ -1,4 +1,8 @@
+import { useDispatch } from "react-redux";
+import { addItem } from "../../features/shoppingList/shoppingListSlice";
+
 const AddItem = () => {
+  const dispatch = useDispatch();
   const newItem = {
     itemName: "",
     qty: "",
@@ -9,7 +13,7 @@ const AddItem = () => {
     const formData = new FormData(e.currentTarget);
     const updatedItem = { ...newItem, ...Object.fromEntries(formData) };
 
-    console.warn(updatedItem);
+    dispatch(addItem(updatedItem));
     // Empty the values
     e.currentTarget.reset();
   };

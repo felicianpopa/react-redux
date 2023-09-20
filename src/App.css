@@ -41,6 +41,10 @@
   color: #888;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 ul {
   padding: 0;
   list-style: none;
@@ -62,4 +66,38 @@ ul li {
 
 .shopping-list-item.checked {
   background-color: #81df81;
+}
+
+form {
+  font-size: 16px;
+}
+
+fieldset {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 15px;
+  border: none;
+  text-align: left;
+  align-items: center;
+}
+
+form button {
+  background-color: #47d54c;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  font-size: inherit;
+}
+
+label {
+  font-weight: bold;
+}
+
+.shadow-box {
+  padding: 15px;
+  border-radius: 6px;
+  background-color: #FFF;
+  box-shadow: 2px 2px 11px 2px rgb(123 121 121 / 75%);
 }

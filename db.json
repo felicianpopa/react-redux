@@ -4,7 +4,7 @@
       "id": 1,
       "itemName": "Milk",
       "qty": 1,
-      "checked": false
+      "checked": true
     },
     {
       "id": 2,

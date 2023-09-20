@@ -13,7 +13,7 @@ const ShoppingList = () => {
   return (
     <div>
       <h2>Shopping list items:</h2>
-      <ul>
+      <ul className="shadow-box">
         {shoppingList.map((listItem) => {
           const { id, itemName } = listItem;
           return (

@@ -1,6 +1,8 @@
 import { Suspense, lazy } from "react";
 import "./App.css";
-const ShoppingList = lazy(() => import("./features/shoppingList/ShoppingList"));
+const ShoppingList = lazy(() =>
+  import("./components/ShoppingList/ShoppingList")
+);
 function App() {
   return (
     <>

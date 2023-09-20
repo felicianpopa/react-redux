@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { toggleChecked } from "./shoppingListSlice";
+import { toggleChecked } from "../../features/shoppingList/shoppingListSlice";
 
 const ShoppingListItem = ({ itemName, qty, checked, id }) => {
   const dispatch = useDispatch();

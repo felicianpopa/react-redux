@@ -1,4 +1,4 @@
-import { getShoppingList } from "./shoppingListSlice";
+import { getShoppingList } from "../../features/shoppingList/shoppingListSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -29,23 +29,26 @@ export const addItem = createAsyncThunk("addItem", async (postData) => {
   }
 });
 
-export const updateItem = async (id, updatedData) => {
+export const updateItem = createAsyncThunk("updateItem", async (item) => {
   try {
-    const response = await fetch(`${url}/${id}`, {
+    const response = await fetch(`${url}/${item.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedData),
+      body: JSON.stringify(item),
     });
 
     if (!response.ok) {
       throw new Error("PUT request failed");
     }
+    const data = response.json();
+
+    return data;
   } catch (error) {
     console.error(error);
   }
-};
+});
 
 const shoppingListSlice = createSlice({
   name: "shoppingList",
@@ -56,7 +59,6 @@ const shoppingListSlice = createSlice({
         (item) => item.id === payload.id
       );
       listItem.checked = listItem.checked ? false : true;
-      updateItem(payload.id, listItem);
     },
   },
   extraReducers: (builder) => {
@@ -81,6 +83,22 @@ const shoppingListSlice = createSlice({
         state.shoppingList.push(action.payload);
       })
       .addCase(addItem.rejected, (state, action) => {
+        state.isLoading = false;
+      });
+
+    builder
+      .addCase(updateItem.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateItem.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const listItem = state.shoppingList.find(
+          (item) => item.id === action.payload.id
+        );
+
+        Object.assign(listItem, action.payload);
+      })
+      .addCase(updateItem.rejected, (state, action) => {
         state.isLoading = false;
       });
   },

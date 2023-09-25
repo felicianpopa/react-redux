@@ -1,15 +1,20 @@
 import { useDispatch } from "react-redux";
-import { toggleChecked } from "../../features/shoppingList/shoppingListSlice";
+import { updateItem } from "../../features/shoppingList/shoppingListSlice";
 
-const ShoppingListItem = ({ itemName, qty, checked, id }) => {
+const ShoppingListItem = ({ ...listItem }) => {
   const dispatch = useDispatch();
+
+  const toggleChecked = (item) => {
+    item.checked = item.checked ? false : true;
+    dispatch(updateItem(item));
+  };
   return (
     <div
-      className={`shopping-list-item ${checked ? "checked" : ""}`}
-      onDoubleClick={() => dispatch(toggleChecked({ id }))}
+      className={`shopping-list-item ${listItem.checked ? "checked" : ""}`}
+      onDoubleClick={() => toggleChecked({ ...listItem })}
     >
-      <span>{itemName}</span>
-      <span>{qty}</span>
+      <span>{listItem.itemName}</span>
+      <span>{listItem.qty}</span>
     </div>
   );
 };

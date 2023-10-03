@@ -25,7 +25,7 @@ export const addItem = createAsyncThunk("addItem", async (postData) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 });
 
@@ -64,42 +64,73 @@ const shoppingListSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getShoppingList.pending, (state) => {
-        state.isLoading = true;
+        return {
+          ...state,
+          isLoading: true,
+        };
       })
       .addCase(getShoppingList.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.shoppingList = action.payload;
+        return {
+          ...state,
+          isLoading: false,
+          shoppingList: action.payload,
+        };
       })
-      .addCase(getShoppingList.rejected, (state, action) => {
-        state.isLoading = false;
+      .addCase(getShoppingList.rejected, (state) => {
+        return {
+          ...state,
+          isLoading: false,
+        };
       });
 
     builder
       .addCase(addItem.pending, (state) => {
-        state.isLoading = true;
+        return {
+          ...state,
+          isLoading: true,
+        };
       })
       .addCase(addItem.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.shoppingList.push(action.payload);
+        return {
+          ...state,
+          isLoading: false,
+          shoppingList: [...state.shoppingList, action.payload],
+        };
       })
-      .addCase(addItem.rejected, (state, action) => {
-        state.isLoading = false;
+      .addCase(addItem.rejected, (state) => {
+        return {
+          ...state,
+          isLoading: false,
+        };
       });
 
     builder
       .addCase(updateItem.pending, (state) => {
-        state.isLoading = true;
+        return {
+          ...state,
+          isLoading: true,
+        };
       })
       .addCase(updateItem.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const listItem = state.shoppingList.find(
-          (item) => item.id === action.payload.id
-        );
-
-        Object.assign(listItem, action.payload);
+        return {
+          ...state,
+          isLoading: false,
+          shoppingList: state.shoppingList.map((item) => {
+            if (item.id === action.payload.id) {
+              return {
+                ...item,
+                ...action.payload,
+              };
+            }
+            return item;
+          }),
+        };
       })
-      .addCase(updateItem.rejected, (state, action) => {
-        state.isLoading = false;
+      .addCase(updateItem.rejected, (state) => {
+        return {
+          ...state,
+          isLoading: false,
+        };
       });
   },
 });

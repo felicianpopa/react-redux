@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { addItem } from "../../features/shoppingList/shoppingListSlice";
+import { updateSuggestions } from "../Suggestions/suggestionsSlice";
+import Suggestions from "../Suggestions/Suggestions";
 
 const AddItem = () => {
   const dispatch = useDispatch();
@@ -18,13 +20,29 @@ const AddItem = () => {
     e.currentTarget.reset();
   };
 
+  const setSearchText = (text) => {
+    if (text.length < 3) {
+      return;
+    }
+    dispatch(updateSuggestions(text));
+  };
+
   return (
     <>
       <h2>Add a new item to the shopping list: </h2>
       <form action="" className="shadow-box" onSubmit={handleSubmit}>
         <fieldset>
           <label htmlFor="itemName">Name:</label>
-          <input type="text" name="itemName" id="itemName" />
+          <input
+            type="text"
+            name="itemName"
+            id="itemName"
+            autoComplete="off"
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <Suggestions />
         </fieldset>
         <fieldset>
           <label htmlFor="qty">Quantity:</label>

@@ -18,5 +18,12 @@
       "qty": 2,
       "checked": true
     }
+  ],
+  "suggestions": [
+    "eggs",
+    "eggplant",
+    "milk",
+    "milkshake",
+    "milkbread"
   ]
 }

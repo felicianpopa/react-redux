@@ -87,20 +87,17 @@ const shoppingListSlice = createSlice({
       .addCase(addItem.pending, (state) => {
         return {
           ...state,
-          isLoading: true,
         };
       })
       .addCase(addItem.fulfilled, (state, action) => {
         return {
           ...state,
-          isLoading: false,
           shoppingList: [...state.shoppingList, action.payload],
         };
       })
       .addCase(addItem.rejected, (state) => {
         return {
           ...state,
-          isLoading: false,
         };
       });
 
@@ -108,13 +105,11 @@ const shoppingListSlice = createSlice({
       .addCase(updateItem.pending, (state) => {
         return {
           ...state,
-          isLoading: true,
         };
       })
       .addCase(updateItem.fulfilled, (state, action) => {
         return {
           ...state,
-          isLoading: false,
           shoppingList: state.shoppingList.map((item) => {
             if (item.id === action.payload.id) {
               return {
@@ -127,10 +122,7 @@ const shoppingListSlice = createSlice({
         };
       })
       .addCase(updateItem.rejected, (state) => {
-        return {
-          ...state,
-          isLoading: false,
-        };
+        return {};
       });
   },
 });

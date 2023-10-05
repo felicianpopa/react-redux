@@ -21,9 +21,6 @@ const AddItem = () => {
   };
 
   const setSearchText = (text) => {
-    if (text.length < 3) {
-      return;
-    }
     dispatch(updateSuggestions(text));
   };
 

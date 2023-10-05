@@ -50,7 +50,7 @@ ul {
   list-style: none;
 }
 
-ul li {
+ul:not(.suggestions) li {
   display: block;
   margin-bottom: 15px;
   border: 1px solid #000;

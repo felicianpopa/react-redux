@@ -1,17 +1,20 @@
-import { Suspense, lazy } from "react";
 import "./App.css";
-import AddItem from "./components/AddItem/AddItem";
-const ShoppingList = lazy(() =>
-  import("./components/ShoppingList/ShoppingList")
-);
+import { Routes, Route } from "react-router-dom";
+import MyLists from "./pages/My-lists";
+import ListFromRecipe from "./pages/List-from-recipe";
+import SimpleList from "./pages/Simple-list";
+import Navigation from "./components/Navigation/Navigation";
+
 function App() {
   return (
     <>
+      <Navigation />
       <h1>Shopping list component</h1>
-      <AddItem />
-      <Suspense fallback={<h2>Loading...</h2>}>
-        <ShoppingList />
-      </Suspense>
+      <Routes>
+        <Route path="/my-lists" element={<MyLists />} />
+        <Route path="/list-from-recipe" element={<ListFromRecipe />} />
+        <Route path="/simple-list" element={<SimpleList />} />
+      </Routes>
     </>
   );
 }

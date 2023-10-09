@@ -6,11 +6,13 @@ const ShoppingList = lazy(() =>
 const SimpleList = () => {
   return (
     <>
-      <h2>Simple list</h2>
-      <AddItem />
-      <Suspense fallback={<h2>Loading...</h2>}>
-        <ShoppingList />
-      </Suspense>
+      <h1>Simple list</h1>
+      <div className="container small-container">
+        <AddItem />
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <ShoppingList />
+        </Suspense>
+      </div>
     </>
   );
 };

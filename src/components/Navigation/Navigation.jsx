@@ -8,10 +8,10 @@ const Navigation = () => {
           <Link to="/my-lists">My Lists</Link>
         </li>
         <li>
-          <Link to="/list-from-recipe">List from recipe</Link>
+          <Link to="/list-from-recipe">New list from recipe</Link>
         </li>
         <li>
-          <Link to="/simple-list">Simple list</Link>
+          <Link to="/simple-list">New simple list</Link>
         </li>
       </ul>
     </nav>

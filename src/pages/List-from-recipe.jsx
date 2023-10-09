@@ -1,5 +1,5 @@
 const ListFromRecipe = () => {
-  return <h2>List from recipe</h2>;
+  return <h1>List from recipe</h1>;
 };
 
 export default ListFromRecipe;

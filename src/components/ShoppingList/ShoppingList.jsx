@@ -17,7 +17,7 @@ const ShoppingList = () => {
         {isLoading ? (
           <h2>Loading ...</h2>
         ) : (
-          <ul>
+          <ul className="shopping-list">
             {shoppingList.map((listItem) => {
               const { id } = listItem;
               return (

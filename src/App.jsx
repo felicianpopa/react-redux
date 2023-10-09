@@ -9,12 +9,13 @@ function App() {
   return (
     <>
       <Navigation />
-      <h1>Shopping list component</h1>
-      <Routes>
-        <Route path="/my-lists" element={<MyLists />} />
-        <Route path="/list-from-recipe" element={<ListFromRecipe />} />
-        <Route path="/simple-list" element={<SimpleList />} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/my-lists" element={<MyLists />} />
+          <Route path="/list-from-recipe" element={<ListFromRecipe />} />
+          <Route path="/simple-list" element={<SimpleList />} />
+        </Routes>
+      </div>
     </>
   );
 }

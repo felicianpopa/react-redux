@@ -1,22 +1,54 @@
 {
-  "shoppingList": [
+  "shoppingLists": [
     {
       "id": 1,
-      "itemName": "Milk",
-      "qty": 1,
-      "checked": true
+      "listName": "First simple list",
+      "listType": "simple-list",
+      "listData": [
+        {
+          "id": 1,
+          "itemName": "Milk",
+          "qty": 1,
+          "checked": true
+        },
+        {
+          "id": 2,
+          "itemName": "Eggs",
+          "qty": 10,
+          "checked": false
+        },
+        {
+          "id": 3,
+          "itemName": "Bread",
+          "qty": 2,
+          "checked": true
+        }
+      ]
     },
     {
       "id": 2,
-      "itemName": "Eggs",
-      "qty": 10,
-      "checked": false
-    },
-    {
-      "id": 3,
-      "itemName": "Bread",
-      "qty": 2,
-      "checked": true
+      "listName": "First list from recipe",
+      "listType": "list-from-recipe",
+      "listData": [
+        {
+          "id": 1,
+          "itemName": "Milk",
+          "qty": 1,
+          "checked": true
+        },
+        {
+          "id": 2,
+          "itemName": "Eggs",
+          "qty": 10,
+          "checked": false
+        },
+        {
+          "id": 3,
+          "itemName": "Bread",
+          "qty": 2,
+          "checked": true
+        }
+      ]
     }
   ],
   "suggestions": [

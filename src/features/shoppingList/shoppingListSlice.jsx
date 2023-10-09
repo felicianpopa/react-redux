@@ -1,12 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const url = "http://localhost:5000/shoppingList";
+const url = "http://localhost:5000/shoppingLists";
 
-export const getShoppingList = createAsyncThunk("getShoppinglist", async () => {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
-});
+export const getShoppingLists = createAsyncThunk(
+  "getShoppinglists",
+  async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  }
+);
 
 export const addItem = createAsyncThunk("addItem", async (postData) => {
   try {
@@ -52,7 +55,7 @@ export const updateItem = createAsyncThunk("updateItem", async (item) => {
 
 const shoppingListSlice = createSlice({
   name: "shoppingList",
-  initialState: { shoppingList: [], isLoading: true },
+  initialState: { shoppingLists: [], isLoading: false },
   reducers: {
     toggleChecked: (state, { payload }) => {
       const listItem = state.shoppingList.find(
@@ -63,20 +66,20 @@ const shoppingListSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getShoppingList.pending, (state) => {
+      .addCase(getShoppingLists.pending, (state) => {
         return {
           ...state,
           isLoading: true,
         };
       })
-      .addCase(getShoppingList.fulfilled, (state, action) => {
+      .addCase(getShoppingLists.fulfilled, (state, action) => {
         return {
           ...state,
           isLoading: false,
-          shoppingList: action.payload,
+          shoppingLists: action.payload,
         };
       })
-      .addCase(getShoppingList.rejected, (state) => {
+      .addCase(getShoppingLists.rejected, (state) => {
         return {
           ...state,
           isLoading: false,

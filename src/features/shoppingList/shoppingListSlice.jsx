@@ -17,26 +17,29 @@ export const getCurrentList = createAsyncThunk("getCurrentList", async (id) => {
   return data;
 });
 
-export const addItem = createAsyncThunk("addItem", async (postData) => {
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    });
+export const addItem = createAsyncThunk(
+  "addItem",
+  async ({ updatedListData, listId }) => {
+    try {
+      const response = await fetch(`${url}/${listId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedListData),
+      });
 
-    if (!response.ok) {
-      throw new Error("POST request failed");
+      if (!response.ok) {
+        throw new Error("POST request failed");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
     }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
   }
-});
+);
 
 export const updateItem = createAsyncThunk("updateItem", async (item) => {
   try {
@@ -120,9 +123,10 @@ const shoppingListSlice = createSlice({
         };
       })
       .addCase(addItem.fulfilled, (state, action) => {
+        console.warn("payload ", action.payload);
         return {
           ...state,
-          shoppingList: [...state.shoppingList, action.payload],
+          currentList: action.payload,
         };
       })
       .addCase(addItem.rejected, (state) => {

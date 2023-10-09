@@ -1,13 +1,9 @@
 import { getCurrentList } from "../../features/shoppingList/shoppingListSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-
 import ShoppingListItem from "./ShoppingListItem";
 
-const ShoppingList = () => {
-  let [searchParams] = useSearchParams();
-  const listId = searchParams.get("id");
+const ShoppingList = ({ listId }) => {
   const { currentList, isLoading } = useSelector((store) => store.shopping);
   const dispatch = useDispatch();
   useEffect(() => {

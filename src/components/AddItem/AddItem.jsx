@@ -3,9 +3,13 @@ import { addItem } from "../../features/shoppingList/shoppingListSlice";
 import { updateSuggestions } from "../Suggestions/suggestionsSlice";
 import Suggestions from "../Suggestions/Suggestions";
 
-const AddItem = () => {
+const AddItem = ({ listId, currentList }) => {
+  const uid = function () {
+    return new Date().getTime();
+  };
   const dispatch = useDispatch();
   const newItem = {
+    id: uid(),
     itemName: "",
     qty: "",
     checked: false,
@@ -13,9 +17,10 @@ const AddItem = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const updatedItem = { ...newItem, ...Object.fromEntries(formData) };
-
-    dispatch(addItem(updatedItem));
+    const newListData = { ...newItem, ...Object.fromEntries(formData) };
+    const updatedListData = { ...currentList };
+    updatedListData.listData = [newListData, ...updatedListData.listData];
+    dispatch(addItem({ updatedListData, listId }));
     // Empty the values
     e.currentTarget.reset();
   };

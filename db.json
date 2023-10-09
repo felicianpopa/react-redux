@@ -2,8 +2,7 @@
   "shoppingLists": [
     {
       "id": 1,
-      "listName": "First simple list",
-      "listType": "simple-list",
+      "listName": "First list",
       "listData": [
         {
           "id": 1,
@@ -27,8 +26,7 @@
     },
     {
       "id": 2,
-      "listName": "First list from recipe",
-      "listType": "list-from-recipe",
+      "listName": "Second list",
       "listData": [
         {
           "id": 1,
@@ -51,6 +49,7 @@
       ]
     }
   ],
+  "currentList": {},
   "suggestions": [
     "eggs",
     "eggplant",

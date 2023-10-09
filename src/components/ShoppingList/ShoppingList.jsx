@@ -1,14 +1,17 @@
-import { getShoppingList } from "../../features/shoppingList/shoppingListSlice";
+import { getCurrentList } from "../../features/shoppingList/shoppingListSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
 import ShoppingListItem from "./ShoppingListItem";
 
 const ShoppingList = () => {
-  const { shoppingList, isLoading } = useSelector((store) => store.shopping);
+  let [searchParams] = useSearchParams();
+  const listId = searchParams.get("id");
+  const { currentList, isLoading } = useSelector((store) => store.shopping);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getShoppingList());
+    dispatch(getCurrentList(listId));
   }, []);
   return (
     <div>
@@ -17,16 +20,18 @@ const ShoppingList = () => {
         {isLoading ? (
           <h2>Loading ...</h2>
         ) : (
-          <ul className="shopping-list">
-            {shoppingList.map((listItem) => {
-              const { id } = listItem;
-              return (
-                <li key={id}>
-                  <ShoppingListItem {...listItem} />
-                </li>
-              );
-            })}
-          </ul>
+          <>
+            <ul className="shopping-list">
+              {currentList.listData.map((listItem) => {
+                const { id } = listItem;
+                return (
+                  <li key={id}>
+                    <ShoppingListItem {...listItem} />
+                  </li>
+                );
+              })}
+            </ul>
+          </>
         )}
       </div>
     </div>

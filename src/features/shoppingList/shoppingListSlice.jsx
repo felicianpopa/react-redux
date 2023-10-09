@@ -11,6 +11,12 @@ export const getShoppingLists = createAsyncThunk(
   }
 );
 
+export const getCurrentList = createAsyncThunk("getCurrentList", async (id) => {
+  const response = await fetch(`${url}/${id}`);
+  const data = await response.json();
+  return data;
+});
+
 export const addItem = createAsyncThunk("addItem", async (postData) => {
   try {
     const response = await fetch(url, {
@@ -55,7 +61,7 @@ export const updateItem = createAsyncThunk("updateItem", async (item) => {
 
 const shoppingListSlice = createSlice({
   name: "shoppingList",
-  initialState: { shoppingLists: [], isLoading: false },
+  initialState: { shoppingLists: [], isLoading: true, currentList: {} },
   reducers: {
     toggleChecked: (state, { payload }) => {
       const listItem = state.shoppingList.find(
@@ -80,6 +86,27 @@ const shoppingListSlice = createSlice({
         };
       })
       .addCase(getShoppingLists.rejected, (state) => {
+        return {
+          ...state,
+          isLoading: false,
+        };
+      });
+
+    builder
+      .addCase(getCurrentList.pending, (state) => {
+        return {
+          ...state,
+          isLoading: true,
+        };
+      })
+      .addCase(getCurrentList.fulfilled, (state, action) => {
+        return {
+          ...state,
+          isLoading: false,
+          currentList: action.payload,
+        };
+      })
+      .addCase(getCurrentList.rejected, (state) => {
         return {
           ...state,
           isLoading: false,

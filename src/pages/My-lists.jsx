@@ -19,7 +19,7 @@ const MyLists = () => {
           {shoppingLists.map((listItem) => {
             return (
               <li key={listItem.id}>
-                <Link to={`/${listItem.listType}?id=${listItem.id}`}>
+                <Link to={`/current-list?id=${listItem.id}`}>
                   {listItem.listName}
                 </Link>
               </li>

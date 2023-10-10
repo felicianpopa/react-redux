@@ -17,8 +17,8 @@ export const getCurrentList = createAsyncThunk("getCurrentList", async (id) => {
   return data;
 });
 
-export const addItem = createAsyncThunk(
-  "addItem",
+export const updateItem = createAsyncThunk(
+  "updateItem",
   async ({ updatedListData, listId }) => {
     try {
       const response = await fetch(`${url}/${listId}`, {
@@ -40,27 +40,6 @@ export const addItem = createAsyncThunk(
     }
   }
 );
-
-export const updateItem = createAsyncThunk("updateItem", async (item) => {
-  try {
-    const response = await fetch(`${url}/${item.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
-    });
-
-    if (!response.ok) {
-      throw new Error("PUT request failed");
-    }
-    const data = response.json();
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-});
 
 const shoppingListSlice = createSlice({
   name: "shoppingList",
@@ -117,25 +96,6 @@ const shoppingListSlice = createSlice({
       });
 
     builder
-      .addCase(addItem.pending, (state) => {
-        return {
-          ...state,
-        };
-      })
-      .addCase(addItem.fulfilled, (state, action) => {
-        console.warn("payload ", action.payload);
-        return {
-          ...state,
-          currentList: action.payload,
-        };
-      })
-      .addCase(addItem.rejected, (state) => {
-        return {
-          ...state,
-        };
-      });
-
-    builder
       .addCase(updateItem.pending, (state) => {
         return {
           ...state,
@@ -144,19 +104,13 @@ const shoppingListSlice = createSlice({
       .addCase(updateItem.fulfilled, (state, action) => {
         return {
           ...state,
-          shoppingList: state.shoppingList.map((item) => {
-            if (item.id === action.payload.id) {
-              return {
-                ...item,
-                ...action.payload,
-              };
-            }
-            return item;
-          }),
+          currentList: action.payload,
         };
       })
       .addCase(updateItem.rejected, (state) => {
-        return {};
+        return {
+          ...state,
+        };
       });
   },
 });

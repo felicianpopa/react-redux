@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addItem } from "../../features/shoppingList/shoppingListSlice";
+import { updateItem } from "../../features/shoppingList/shoppingListSlice";
 import { updateSuggestions } from "../Suggestions/suggestionsSlice";
 import Suggestions from "../Suggestions/Suggestions";
 
@@ -20,7 +20,7 @@ const AddItem = ({ listId, currentList }) => {
     const newListData = { ...newItem, ...Object.fromEntries(formData) };
     const updatedListData = { ...currentList };
     updatedListData.listData = [newListData, ...updatedListData.listData];
-    dispatch(addItem({ updatedListData, listId }));
+    dispatch(updateItem({ updatedListData, listId }));
     // Empty the values
     e.currentTarget.reset();
   };

@@ -1,7 +1,5 @@
 import { useDispatch } from "react-redux";
 import { updateItem } from "../../features/shoppingList/shoppingListSlice";
-import { updateSuggestions } from "../Suggestions/suggestionsSlice";
-import Suggestions from "../Suggestions/Suggestions";
 
 const AddItem = ({ listId, currentList }) => {
   const uid = function () {
@@ -25,26 +23,13 @@ const AddItem = ({ listId, currentList }) => {
     e.currentTarget.reset();
   };
 
-  const setSearchText = (text) => {
-    dispatch(updateSuggestions(text));
-  };
-
   return (
     <>
       <h2>Add a new item to the shopping list: </h2>
       <form action="" className="shadow-box" onSubmit={handleSubmit}>
         <fieldset>
           <label htmlFor="itemName">Name:</label>
-          <input
-            type="text"
-            name="itemName"
-            id="itemName"
-            autoComplete="off"
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
-          {/* <Suggestions /> */}
+          <input type="text" name="itemName" id="itemName" />
         </fieldset>
         <fieldset>
           <label htmlFor="qty">Quantity:</label>

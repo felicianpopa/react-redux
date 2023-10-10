@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-const Suggestions = ({ url, suggestionsText }) => {
+const Suggestions = ({ url, suggestionsText, suggestionsLength }) => {
   const [suggestions, setSuggestions] = useState([]);
-  const query = url + suggestionsText;
-  const suggestionsLength = 4;
-  const getSuggestions = async (query) => {
+
+  const getSuggestions = async () => {
     const response = await fetch(
       `${url}&query=${suggestionsText}&number=${suggestionsLength}`
     );
     const data = await response.json();
-    console.warn(data.results);
     setSuggestions(data.results);
   };
+
+  // Update the suggestions
   useEffect(() => {
     if (suggestionsText.length > 2) {
-      getSuggestions(query);
+      getSuggestions();
     }
   }, [suggestionsText]);
   return (
@@ -21,7 +21,16 @@ const Suggestions = ({ url, suggestionsText }) => {
       <h2>Suggestions</h2>
       <ul className="suggestions">
         {suggestions.map(({ title, id }) => {
-          return <li key={id}>{title}</li>;
+          return (
+            <li
+              key={id}
+              onClick={() => {
+                handleSuggestionClick(id);
+              }}
+            >
+              {title}
+            </li>
+          );
         })}
       </ul>
     </div>

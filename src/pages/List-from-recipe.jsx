@@ -16,7 +16,11 @@ const ListFromRecipe = () => {
             setSuggestionsText(e.target.value);
           }}
         />
-        <Suggestions url={url} suggestionsText={suggestionsText} />
+        <Suggestions
+          url={url}
+          suggestionsText={suggestionsText}
+          suggestionsLength="4"
+        />
       </div>
       <NewList />
     </>

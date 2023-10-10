@@ -17,11 +17,13 @@ export const getCurrentList = createAsyncThunk("getCurrentList", async (id) => {
   return data;
 });
 
+// Updates the whole list data.
+// This is done because json-server does not accept nesting like shoppingLists/1/listData
 export const updateItem = createAsyncThunk(
   "updateItem",
-  async ({ updatedListData, listId }) => {
+  async (updatedListData) => {
     try {
-      const response = await fetch(`${url}/${listId}`, {
+      const response = await fetch(`${url}/${updatedListData.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

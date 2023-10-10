@@ -1,12 +1,19 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateItem } from "../../features/shoppingList/shoppingListSlice";
 
 const ShoppingListItem = ({ ...listItem }) => {
+  const { currentList } = useSelector((store) => store.shopping);
   const dispatch = useDispatch();
 
-  const toggleChecked = (item) => {
-    item.checked = item.checked ? false : true;
-    dispatch(updateItem(item));
+  const toggleChecked = (itemData) => {
+    const updatedItemsData = currentList.listData.map((item) => {
+      if (item.id === itemData.id) {
+        return { ...item, checked: !item.checked };
+      }
+      return item;
+    });
+    const updatedListData = { ...currentList, listData: updatedItemsData };
+    dispatch(updateItem(updatedListData));
   };
   return (
     <div

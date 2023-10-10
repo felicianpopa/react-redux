@@ -20,7 +20,7 @@ const AddItem = ({ listId, currentList }) => {
     const newListData = { ...newItem, ...Object.fromEntries(formData) };
     const updatedListData = { ...currentList };
     updatedListData.listData = [newListData, ...updatedListData.listData];
-    dispatch(updateItem({ updatedListData, listId }));
+    dispatch(updateItem(updatedListData));
     // Empty the values
     e.currentTarget.reset();
   };

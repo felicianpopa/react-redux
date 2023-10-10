@@ -46,14 +46,7 @@ export const updateItem = createAsyncThunk(
 const shoppingListSlice = createSlice({
   name: "shoppingList",
   initialState: { shoppingLists: [], isLoading: true, currentList: {} },
-  reducers: {
-    toggleChecked: (state, { payload }) => {
-      const listItem = state.shoppingList.find(
-        (item) => item.id === payload.id
-      );
-      listItem.checked = listItem.checked ? false : true;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getShoppingLists.pending, (state) => {
@@ -117,6 +110,6 @@ const shoppingListSlice = createSlice({
   },
 });
 
-export const { toggleChecked } = shoppingListSlice.actions;
+export const {} = shoppingListSlice.actions;
 
 export default shoppingListSlice.reducer;

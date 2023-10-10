@@ -2,6 +2,25 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const url = "http://localhost:5000/shoppingLists";
 
+export const createShoppinglist = createAsyncThunk(
+  "createShoppingList",
+  async (listName) => {
+    const newShoppingList = {
+      listName: listName,
+      listData: [],
+    };
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newShoppingList),
+    });
+    const data = await response.json();
+    return data;
+  }
+);
+
 export const getShoppingLists = createAsyncThunk(
   "getShoppinglists",
   async () => {
@@ -49,6 +68,7 @@ const shoppingListSlice = createSlice({
     shoppingLists: [],
     isLoading: true,
     currentList: { listData: [] },
+    newListId: null,
   },
   reducers: {
     setLoading: (state, action) => {
@@ -57,8 +77,37 @@ const shoppingListSlice = createSlice({
         isLoading: action.payload,
       };
     },
+    resetNewListId: (state) => {
+      return {
+        ...state,
+        newListId: null,
+      };
+    },
   },
   extraReducers: (builder) => {
+    builder
+      .addCase(createShoppinglist.pending, (state) => {
+        return {
+          ...state,
+          isLoading: true,
+        };
+      })
+      .addCase(createShoppinglist.fulfilled, (state, action) => {
+        return {
+          ...state,
+          isLoading: false,
+          shoppingLists: [...state.shoppingLists, action.payload],
+          currentList: action.payload,
+          newListId: action.payload.id,
+        };
+      })
+      .addCase(createShoppinglist.rejected, (state) => {
+        return {
+          ...state,
+          isLoading: false,
+        };
+      });
+
     builder
       .addCase(getShoppingLists.pending, (state) => {
         return {
@@ -121,6 +170,6 @@ const shoppingListSlice = createSlice({
   },
 });
 
-export const { setLoading } = shoppingListSlice.actions;
+export const { setLoading, resetNewListId } = shoppingListSlice.actions;
 
 export default shoppingListSlice.reducer;

@@ -1,21 +1,44 @@
 import { useEffect, useState } from "react";
-const Suggestions = ({ url, suggestionsText, suggestionsLength }) => {
+import { IngredientsResponse } from "../../data/suggestionsResponse";
+import { updateItem } from "../../features/shoppingList/shoppingListSlice";
+import { useDispatch, useSelector } from "react-redux";
+const Suggestions = ({ url, suggestionsText, suggestionsLength, apiKey }) => {
+  const { currentList } = useSelector((store) => store.shopping);
+
+  const dispatch = useDispatch();
   const [suggestions, setSuggestions] = useState([]);
 
-  const getSuggestions = async () => {
+  const getReipes = async () => {
     const response = await fetch(
-      `${url}&query=${suggestionsText}&number=${suggestionsLength}`
+      `${url}/complexSearch?apiKey=${apiKey}&query=${suggestionsText}&number=${suggestionsLength}`
     );
     const data = await response.json();
     setSuggestions(data.results);
   };
 
+  const getRecipeIngredients = async (id) => {
+    const response = await fetch(
+      `${url}/${id}/information?apiKey=${apiKey}&includeNutrition=false`
+    );
+    const data = await response.json();
+    const ingredients = IngredientsResponse.map(data);
+    const updatedListData = {
+      ...currentList,
+      listData: [...currentList.listData, ...ingredients],
+    };
+    dispatch(updateItem(updatedListData));
+  };
+
   // Update the suggestions
   useEffect(() => {
     if (suggestionsText.length > 2) {
-      getSuggestions();
+      getReipes();
     }
   }, [suggestionsText]);
+
+  const handleSuggestionClick = (id) => {
+    getRecipeIngredients(id);
+  };
   return (
     <div className="suggestions">
       <h2>Suggestions</h2>

@@ -21,7 +21,10 @@ const ShoppingListItem = ({ ...listItem }) => {
       onDoubleClick={() => toggleChecked({ ...listItem })}
     >
       <span>{listItem.itemName}</span>
-      <span>{listItem.qty}</span>
+      <span>
+        {listItem.qty}
+        {listItem.unit}
+      </span>
     </div>
   );
 };

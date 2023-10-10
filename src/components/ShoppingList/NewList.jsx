@@ -1,18 +1,28 @@
 import ShoppingList from "./ShoppingList";
-import AddItem from "../AddItem/AddItem";
-import { useSelector, useDispatch } from "react-redux";
-import { setLoading } from "../../features/shoppingList/shoppingListSlice";
+import { useDispatch } from "react-redux";
+import {
+  setLoading,
+  createShoppinglist,
+} from "../../features/shoppingList/shoppingListSlice";
 import { useEffect } from "react";
 const NewList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setLoading(false));
   }, []);
-  const currentList = useSelector((store) => store.shopping.currentList);
+  const handleCreateList = () => {
+    dispatch(createShoppinglist());
+  };
   return (
     <>
       <ShoppingList listId="newList" />
-      <AddItem listId="newList" currentList={currentList} />
+      <button
+        onClick={() => {
+          handleCreateList();
+        }}
+      >
+        Create List
+      </button>
     </>
   );
 };

@@ -6,9 +6,12 @@ import ShoppingListItem from "./ShoppingListItem";
 const ShoppingList = ({ listId }) => {
   const { currentList, isLoading } = useSelector((store) => store.shopping);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCurrentList(listId));
-  }, []);
+  if (listId !== "newList") {
+    useEffect(() => {
+      dispatch(getCurrentList(listId));
+    }, []);
+  }
+
   return (
     <div>
       <h2>Shopping list items:</h2>

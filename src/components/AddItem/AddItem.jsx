@@ -44,7 +44,7 @@ const AddItem = ({ listId, currentList }) => {
               setSearchText(e.target.value);
             }}
           />
-          <Suggestions />
+          {/* <Suggestions /> */}
         </fieldset>
         <fieldset>
           <label htmlFor="qty">Quantity:</label>

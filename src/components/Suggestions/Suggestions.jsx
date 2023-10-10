@@ -1,38 +1,31 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useRef } from "react";
-import { getSuggestions } from "./suggestionsSlice";
-
-const Suggestions = () => {
-  const minSuggestionLength = 2;
-  const dispatch = useDispatch();
-  const isMounted = useRef(false);
-  const { suggestionsText, suggestionsData } = useSelector(
-    (store) => store.suggestions
-  );
+import { useEffect, useState } from "react";
+const Suggestions = ({ url, suggestionsText }) => {
+  const [suggestions, setSuggestions] = useState([]);
+  const query = url + suggestionsText;
+  const suggestionsLength = 4;
+  const getSuggestions = async (query) => {
+    const response = await fetch(
+      `${url}&query=${suggestionsText}&number=${suggestionsLength}`
+    );
+    const data = await response.json();
+    console.warn(data.results);
+    setSuggestions(data.results);
+  };
   useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
-      return;
-    }
-    if (suggestionsText.length > minSuggestionLength) {
-      dispatch(getSuggestions(suggestionsText));
+    if (suggestionsText.length > 2) {
+      getSuggestions(query);
     }
   }, [suggestionsText]);
-  if (
-    suggestionsData.length > 0 &&
-    suggestionsText.length > minSuggestionLength
-  ) {
-    return (
-      <div className="suggestions">
-        <h2>Suggestions</h2>
-        <ul className="suggestions">
-          {suggestionsData.map((suggestion, id) => {
-            return <li key={id}>{suggestion}</li>;
-          })}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div className="suggestions">
+      <h2>Suggestions</h2>
+      <ul className="suggestions">
+        {suggestions.map(({ title, id }) => {
+          return <li key={id}>{title}</li>;
+        })}
+      </ul>
+    </div>
+  );
 };
 
 export default Suggestions;

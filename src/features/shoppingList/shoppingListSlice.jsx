@@ -45,8 +45,19 @@ export const updateItem = createAsyncThunk(
 
 const shoppingListSlice = createSlice({
   name: "shoppingList",
-  initialState: { shoppingLists: [], isLoading: true, currentList: {} },
-  reducers: {},
+  initialState: {
+    shoppingLists: [],
+    isLoading: true,
+    currentList: { listData: [] },
+  },
+  reducers: {
+    setLoading: (state, action) => {
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getShoppingLists.pending, (state) => {
@@ -110,6 +121,6 @@ const shoppingListSlice = createSlice({
   },
 });
 
-export const {} = shoppingListSlice.actions;
+export const { setLoading } = shoppingListSlice.actions;
 
 export default shoppingListSlice.reducer;

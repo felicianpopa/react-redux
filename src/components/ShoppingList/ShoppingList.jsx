@@ -1,16 +1,8 @@
-import { getCurrentList } from "../../features/shoppingList/shoppingListSlice";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ShoppingListItem from "./ShoppingListItem";
 
-const ShoppingList = ({ listId }) => {
+const ShoppingList = () => {
   const { currentList, isLoading } = useSelector((store) => store.shopping);
-  const dispatch = useDispatch();
-  if (listId !== "newList") {
-    useEffect(() => {
-      dispatch(getCurrentList(listId));
-    }, []);
-  }
 
   return (
     <div>

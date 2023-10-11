@@ -1,14 +1,19 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import AddItem from "./../components/AddItem/AddItem";
 import { Link } from "react-router-dom";
 import ShoppingList from "../components/ShoppingList/ShoppingList";
+import { getCurrentList } from "../features/shoppingList/shoppingListSlice";
 import RecipeSuggestions from "../components/Suggestions/RecipeSuggestions";
 const CurrentList = () => {
   let [searchParams] = useSearchParams();
   const listId = searchParams.get("id");
   const currentList = useSelector((store) => store.shopping.currentList);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCurrentList(listId));
+  }, []);
 
   const url = "https://api.spoonacular.com/recipes";
   const [suggestionsText, setSuggestionsText] = useState("");

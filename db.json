@@ -51,10 +51,25 @@
   ],
   "currentList": {},
   "suggestions": [
-    "eggs",
-    "eggplant",
-    "milk",
-    "milkshake",
-    "milkbread"
+    {
+      "title": "eggs",
+      "id": 1
+    },
+    {
+      "title": "eggplant",
+      "id": 2
+    },
+    {
+      "title": "milk",
+      "id": 3
+    },
+    {
+      "title": "milkshake",
+      "id": 4
+    },
+    {
+      "title": "milkbread",
+      "id": 5
+    }
   ]
 }

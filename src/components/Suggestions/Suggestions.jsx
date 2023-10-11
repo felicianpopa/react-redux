@@ -1,8 +1,7 @@
 const Suggestions = ({ suggestions, handleSuggestionClick }) => {
   return (
     <div className="suggestions">
-      <h2>Suggestions</h2>
-      <ul className="suggestions">
+      <ul>
         {suggestions.map(({ title, id }) => {
           return (
             <li

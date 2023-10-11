@@ -14,23 +14,23 @@ const CurrentList = () => {
   return (
     <>
       <h1>{currentList.listName}</h1>
-      <div>
-        Search for a recipe:
-        <input
-          type="text"
-          autoComplete="off"
-          onChange={(e) => {
-            setSuggestionsText(e.target.value);
-          }}
-        />
-        <RecipeSuggestions
-          apiKey="d0f40009910e48c8aad529f74ed12128"
-          url={url}
-          suggestionsText={suggestionsText}
-          suggestionsLength="4"
-        />
-      </div>
-      <div className="container small-container">
+      <div className="small-container">
+        <div className="shadow-box">
+          <h2>Search for a recipe:</h2>
+          <input
+            type="text"
+            autoComplete="off"
+            onChange={(e) => {
+              setSuggestionsText(e.target.value);
+            }}
+          />
+          <RecipeSuggestions
+            apiKey="d0f40009910e48c8aad529f74ed12128"
+            url={url}
+            suggestionsText={suggestionsText}
+            suggestionsLength="4"
+          />
+        </div>
         <ShoppingList listId={listId} />
         <AddItem listId={listId} currentList={currentList} />
       </div>

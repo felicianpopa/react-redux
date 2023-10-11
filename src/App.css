@@ -49,9 +49,13 @@
   margin: auto;
   width: 100%;
   max-width: 1280px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
 }
 
 .small-container {
+  margin: auto;
   max-width: 600px;
 }
 
@@ -130,4 +134,28 @@ label {
   border-radius: 6px;
   background-color: #FFF;
   box-shadow: 2px 2px 11px 2px rgb(123 121 121 / 75%);
+}
+
+.suggestions {
+  position: relative;
+  width: 100%;
+}
+
+.suggestions ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #FFF;
+  border: 1px solid #000;
+  border-radius: 6px;
+}
+
+.suggestions ul li {
+  padding: 5px;
+}
+
+.suggestions ul li:hover {
+  cursor: pointer;
+  background-color: #81df81;
 }

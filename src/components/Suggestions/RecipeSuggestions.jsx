@@ -14,6 +14,7 @@ const RecipeSuggestions = ({
 
   const dispatch = useDispatch();
   const [suggestions, setSuggestions] = useState([]);
+  const minSuggestionLength = 2;
 
   const getReipes = async () => {
     const response = await fetch(
@@ -38,7 +39,7 @@ const RecipeSuggestions = ({
 
   // Update the suggestions
   useEffect(() => {
-    if (suggestionsText.length > 2) {
+    if (suggestionsText.length > minSuggestionLength) {
       getReipes();
     }
   }, [suggestionsText]);
@@ -46,13 +47,14 @@ const RecipeSuggestions = ({
   const handleSuggestionClick = ({ id }) => {
     getRecipeIngredients(id);
   };
-
-  return (
-    <Suggestions
-      suggestions={suggestions}
-      handleSuggestionClick={handleSuggestionClick}
-    />
-  );
+  if (suggestions.length > 0 && suggestionsText.length > minSuggestionLength) {
+    return (
+      <Suggestions
+        suggestions={suggestions}
+        handleSuggestionClick={handleSuggestionClick}
+      />
+    );
+  }
 };
 
 export default RecipeSuggestions;

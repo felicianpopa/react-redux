@@ -46,20 +46,22 @@ const AddItem = ({ listId, currentList }) => {
       <form action="" className="shadow-box" onSubmit={handleSubmit}>
         <fieldset>
           <label htmlFor="itemName">Name:</label>
-          <input
-            type="text"
-            name="itemName"
-            id="itemName"
-            autoComplete="off"
-            value={searchText}
-            onChange={(e) => {
-              handleChange(e.target.value);
-            }}
-          />
-          <SimpleSuggestions
-            suggestionsText={suggestionsText}
-            handleSuggestionClick={handleSuggestionClick}
-          />
+          <div>
+            <input
+              type="text"
+              name="itemName"
+              id="itemName"
+              autoComplete="off"
+              value={searchText}
+              onChange={(e) => {
+                handleChange(e.target.value);
+              }}
+            />
+            <SimpleSuggestions
+              suggestionsText={suggestionsText}
+              handleSuggestionClick={handleSuggestionClick}
+            />
+          </div>
         </fieldset>
         <fieldset>
           <label htmlFor="qty">Quantity:</label>

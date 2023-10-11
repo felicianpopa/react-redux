@@ -15,17 +15,19 @@ const MyLists = () => {
       {isLoading ? (
         <h2>Loading ...</h2>
       ) : (
-        <ul className="my-lists">
-          {shoppingLists.map((listItem) => {
-            return (
-              <li key={listItem.id}>
-                <Link to={`/current-list?id=${listItem.id}`}>
-                  {listItem.listName}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="small-container shadow-box">
+          <ul className="my-lists">
+            {shoppingLists.map((listItem) => {
+              return (
+                <li key={listItem.id}>
+                  <Link to={`/current-list?id=${listItem.id}`}>
+                    {listItem.listName}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )}
     </>
   );

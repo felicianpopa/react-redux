@@ -30,7 +30,11 @@ const CreateList = () => {
   };
   return (
     <>
-      <form action="" className="shadow-box" onSubmit={handleSubmit}>
+      <form
+        action=""
+        className="small-container shadow-box"
+        onSubmit={handleSubmit}
+      >
         <fieldset>
           <label htmlFor="listName">List name:</label>
           <input type="text" name="listName" id="listName" autoComplete="off" />

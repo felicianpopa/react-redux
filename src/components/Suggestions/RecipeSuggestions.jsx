@@ -14,14 +14,21 @@ const RecipeSuggestions = ({
 
   const dispatch = useDispatch();
   const [suggestions, setSuggestions] = useState([]);
+  const [fetchError, setFetchError] = useState(false);
   const minSuggestionLength = 2;
 
   const getReipes = async () => {
-    const response = await fetch(
-      `${url}/complexSearch?apiKey=${apiKey}&query=${suggestionsText}&number=${suggestionsLength}`
-    );
-    const data = await response.json();
-    setSuggestions(data.results);
+    try {
+      const response = await fetch(
+        `${url}/complexSearch?apiKey=${apiKey}&query=${suggestionsText}&number=${suggestionsLength}`
+      );
+      const data = await response.json();
+      setSuggestions(data.results);
+    } catch (error) {
+      console.error(error);
+      setFetchError(true);
+      setSuggestions([]);
+    }
   };
 
   const getRecipeIngredients = async (id) => {
@@ -47,7 +54,20 @@ const RecipeSuggestions = ({
   const handleSuggestionClick = ({ id }) => {
     getRecipeIngredients(id);
   };
-  if (suggestions.length > 0 && suggestionsText.length > minSuggestionLength) {
+  if (fetchError && suggestionsText.length > minSuggestionLength) {
+    return (
+      <div className="error-message">
+        <p>There was an error fetching the recipe list</p>
+        <p>
+          This is probably due to the limited number of requests. Please check
+          the console for additional information
+        </p>
+      </div>
+    );
+  } else if (
+    suggestions.length > 0 &&
+    suggestionsText.length > minSuggestionLength
+  ) {
     return (
       <Suggestions
         suggestions={suggestions}

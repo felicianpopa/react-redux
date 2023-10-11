@@ -159,3 +159,11 @@ label {
   cursor: pointer;
   background-color: #81df81;
 }
+
+.error-message {
+  margin: 15px auto;
+  padding: 15px;
+  border: 1px solid red;
+  border-radius: 6px;
+  color: red;
+}

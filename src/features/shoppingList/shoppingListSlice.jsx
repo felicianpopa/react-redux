@@ -31,9 +31,16 @@ export const getShoppingLists = createAsyncThunk(
 );
 
 export const getCurrentList = createAsyncThunk("getCurrentList", async (id) => {
-  const response = await fetch(`${url}/${id}`);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(`${url}/${id}`);
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // Updates the whole list data.
@@ -140,7 +147,8 @@ const shoppingListSlice = createSlice({
         return {
           ...state,
           isLoading: false,
-          currentList: action.payload,
+          // if the currentList is undefined set it to null
+          currentList: action.payload || null,
         };
       })
       .addCase(getCurrentList.rejected, (state) => {

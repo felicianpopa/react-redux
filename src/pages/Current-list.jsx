@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import AddItem from "./../components/AddItem/AddItem";
 import ShoppingList from "../components/ShoppingList/ShoppingList";
-import Suggestions from "../components/Suggestions/Suggestions";
+import RecipeSuggestions from "../components/Suggestions/RecipeSuggestions";
 const CurrentList = () => {
   let [searchParams] = useSearchParams();
   const listId = searchParams.get("id");
@@ -23,7 +23,7 @@ const CurrentList = () => {
             setSuggestionsText(e.target.value);
           }}
         />
-        <Suggestions
+        <RecipeSuggestions
           apiKey="d0f40009910e48c8aad529f74ed12128"
           url={url}
           suggestionsText={suggestionsText}

@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateItem } from "../../features/shoppingList/shoppingListSlice";
+import SimpleSuggestions from "../Suggestions/SimpleSuggestions";
 
 const AddItem = ({ listId, currentList }) => {
   const uid = function () {
@@ -12,6 +14,10 @@ const AddItem = ({ listId, currentList }) => {
     qty: "",
     checked: false,
   };
+
+  const [searchText, setSearchText] = useState("");
+  const [suggestionsText, setSuggestionsText] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -21,6 +27,17 @@ const AddItem = ({ listId, currentList }) => {
     dispatch(updateItem(updatedListData));
     // Empty the values
     e.currentTarget.reset();
+    setSearchText("");
+  };
+
+  const handleChange = (text) => {
+    setSearchText(text);
+    setSuggestionsText(text);
+  };
+
+  const handleSuggestionClick = ({ title }) => {
+    setSearchText(title);
+    setSuggestionsText("");
   };
 
   return (
@@ -29,7 +46,20 @@ const AddItem = ({ listId, currentList }) => {
       <form action="" className="shadow-box" onSubmit={handleSubmit}>
         <fieldset>
           <label htmlFor="itemName">Name:</label>
-          <input type="text" name="itemName" id="itemName" />
+          <input
+            type="text"
+            name="itemName"
+            id="itemName"
+            autoComplete="off"
+            value={searchText}
+            onChange={(e) => {
+              handleChange(e.target.value);
+            }}
+          />
+          <SimpleSuggestions
+            suggestionsText={suggestionsText}
+            handleSuggestionClick={handleSuggestionClick}
+          />
         </fieldset>
         <fieldset>
           <label htmlFor="qty">Quantity:</label>

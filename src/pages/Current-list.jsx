@@ -33,7 +33,7 @@ const CurrentList = () => {
       <>
         <h1>{currentList.listName}</h1>
         <div className="small-container">
-          <div className="shadow-box">
+          <div className="shadow-box recipe-suggestions">
             <h2>Search for a recipe:</h2>
             <input
               type="text"

@@ -171,3 +171,15 @@ label {
   border-radius: 6px;
   color: red;
 }
+
+.recipe-suggestions .suggestions {
+  display: none;
+}
+
+.recipe-suggestions input:focus+.suggestions {
+  display: block;
+}
+
+.recipe-suggestions:hover .suggestions {
+  display: block;
+}

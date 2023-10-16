@@ -53,7 +53,6 @@ const RecipeSuggestions = ({
 
   const handleSuggestionClick = ({ id }) => {
     getRecipeIngredients(id);
-    setSuggestions([]);
   };
   if (fetchError && suggestionsText.length > minSuggestionLength) {
     return (
